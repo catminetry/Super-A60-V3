@@ -2,13 +2,13 @@ local spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/Regul
 
 local entity = spawner.Create({
 	Entity = {
-		Name = "Super A-60",
+		Name = "SuperA60",
 		Asset = "https://github.com/catminetry/Super-A60-V3/blob/main/Super%20A-60%20V4.5(bug%20fixed).rbxm?raw=true",
 		HeightOffset = 0
 	},
 	Lights = {
 		Flicker = {
-			Enabled = true,
+			Enabled = false,
 			Duration = 1
 		},
 		Shatter = true,
@@ -17,7 +17,7 @@ local entity = spawner.Create({
 	CameraShake = {
 		Enabled = true,
 		Range = 100,
-		Values = {1.5, 20, 0.1, 1} 
+		Values = {2.5, 25, 0.5, 2} 
 	},
 	Movement = {
 		Speed = 350,
@@ -29,7 +29,7 @@ local entity = spawner.Create({
 		Type = "Ambush", 
 		Min = 1,
 		Max = 8,
-		Delay = 0
+		Delay = 0.2
 	},
 	Damage = {
 		Enabled = true,
@@ -45,18 +45,18 @@ local entity = spawner.Create({
 	Death = {
 		Type = "Guiding", 
 		Hints = {"You die to Super A-60..", "it's fast to neer you...", "use what you learn from Ambush..", "Wait,you won't see it..", "Good luck!"},
-		Cause = ""
+		Cause = "Super A-60"
 	}
 })
 
 entity:SetCallback("OnSpawned", function()
-    
-	local a = game.Workspace:FindFirstChild("SuperA60")
-	local face1 = a:FindFirstChild("RushNew"):FindFirstChild("mainatt"):FindFirstChild("face1")
-	local face2 = a:FindFirstChild("RushNew"):FindFirstChild("mainatt"):FindFirstChild("face2")
+    wait(0.2)
+	local a = game.Workspace:FindFristChild("SuperA60")
+	local face1 = a:FindFristChild("RushNew"):FindFristChild("mainatt"):FindFristChild("face1")
+	local face2 = a:FindFristChild("RushNew"):FindFristChild("mainatt"):FindFristChild("face2")
 	
-	face1:FindFirstChild("facechange").Enabled = true
-	face2:FindFirstChild("facechange2").Enabled = true
+	face1:FindFristChild("facechange").Enabled = true
+	face2:FindFristChild("facechange2").Enabled = true
 
 end)
 
@@ -94,9 +94,9 @@ end)
 
 entity:SetCallback("OnDespawning", function()
 
-	local Reboundcolor = Instance.new("ColorCorrectionEffect",game.Lighting) game.Debris:AddItem(Reboundcolor,24)
+	local Reboundcolor = Instance.new("ColorCorrectionEffect", game.Lighting) game.Debris:AddItem(Reboundcolor,24)
 Reboundcolor.Name = "Warn"
-Reboundcolor.TintColor = Color3.fromRGB(170, 0, 0) Reboundcolor.Saturation = -0.5 Reboundcolor.Contrast = 0.9
+Reboundcolor.TintColor = Color3.fromRGB(170, 0, 0) Reboundcolor.Saturation = 20 Reboundcolor.Contrast = -3
 game.TweenService:Create(Reboundcolor,TweenInfo.new(15),{TintColor = Color3.fromRGB(255, 0, 0),Saturation = 0, Contrast = 0}):Play()
 local TweenService = game:GetService("TweenService")
 local TW = TweenService:Create(game.Lighting.MainColorCorrection, TweenInfo.new(5),{TintColor = Color3.fromRGB(170, 0, 0)})
@@ -109,7 +109,7 @@ entity:SetCallback("OnDespawned", function()
 end)
 
 entity:SetCallback("OnDamagePlayer", function(newHealth)
-	if newHealth > 0 then
+	if newHealth >= 0 then
 		
         local A60 = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
@@ -251,7 +251,9 @@ coroutine.wrap(HPVZT_fake_script)()
 
 	else
 		print("Entity has damaged the player")
+		writefile("A60 Damaged", "Ouch!")
 	end
 end)
 
 entity:Run()
+--entity:Pause()
